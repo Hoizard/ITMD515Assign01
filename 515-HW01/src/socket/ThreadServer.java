@@ -21,21 +21,29 @@ public class ThreadServer implements Runnable {
             String info;
             String res;
         	int result=0;
+        	String ss="";
 			while(true) {	
 			   info = (String) in.readObject();
 				 res=info;
 				for(int i=0;i<info.length()-1;i++) {
 					if(info.substring(i,i+1).equals("+")) {
+						ss="";
 						result=Integer.parseInt((info.substring(0, i)).trim())+Integer.parseInt((info.substring(i+1, info.length())).trim());
-					}
-					if(info.substring(i,i+1).equals("-")) {
-						result=Integer.parseInt((info.substring(0, i)).trim())-Integer.parseInt((info.substring(i+1, info.length())).trim());
-					}
-					if(info.substring(i,i+1).equals("*")) {
+					    break;
+					} else if(info.substring(i,i+1).equals("-")) {
+                        ss="";
+                        result=Integer.parseInt((info.substring(0, i)).trim())-Integer.parseInt((info.substring(i+1, info.length())).trim());
+					    break;
+					}else if(info.substring(i,i+1).equals("*")) {
 						result=Integer.parseInt((info.substring(0, i)).trim())*Integer.parseInt((info.substring(i+1, info.length())).trim());
-					}
-					if(info.substring(i,i+1).equals("/")) {
+					    ss="";
+					    break;
+					}else if(info.substring(i,i+1).equals("/")) {
 						result=Integer.parseInt((info.substring(0, i)).trim())/Integer.parseInt((info.substring(i+1, info.length())).trim());
+					    ss="";
+					    break;
+					}else {
+						ss="Server: 515OK";
 					}
 				}
 //			socket.shutdownInput();

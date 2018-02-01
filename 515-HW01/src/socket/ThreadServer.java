@@ -39,8 +39,9 @@ public class ThreadServer implements Runnable {
 					}
 				}
 //			socket.shutdownInput();
-				
-				String ss="515OK "+res+" = "+result;
+				if(!ss.equals("Server: 515OK")) {
+					ss="515OK " + res + " = " + result;
+				}
 				out.write(ss.getBytes());
 			
 		     }
